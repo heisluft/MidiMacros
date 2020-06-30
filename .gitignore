@@ -1,0 +1,15 @@
+# Gitignore file of MidiMacros
+# Eclipse
+/.settings/
+/bin/
+.classpath
+.project
+
+# IntelliJ
+/.idea/
+/out/
+*.iml
+
+# Gradle
+/.gradle/
+/build/
