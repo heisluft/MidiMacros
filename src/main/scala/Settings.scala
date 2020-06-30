@@ -59,9 +59,8 @@ object Settings {
     val split = string.split(",").map(_.trim)
     if (split.length != 3) throw new Exception
     val keysToPress = split(2).split('+').map(_.trim).map(k => {
-      if (k == "ALT") KeyEvent.VK_ALT
-      if (k == "SHIFT") KeyEvent.VK_SHIFT
-      classOf[KeyEvent].getField("VK_" + k.toUpperCase(Locale.ROOT)).get(null).asInstanceOf[Int]
+      if (k == "CTRL") KeyEvent.VK_CONTROL
+      else classOf[KeyEvent].getField("VK_" + k.toUpperCase(Locale.ROOT)).get(null).asInstanceOf[Int]
     })
     if (split(1) == "ONCE")
       (noteToCode(split(0)), (i, r) =>
@@ -74,7 +73,7 @@ object Settings {
       i match {
         case MidiInputCapture.NOTE_ON => keysToPress.foreach(r.keyPress)
         case MidiInputCapture.NOTE_OFF => keysToPress.foreach(r.keyRelease)
-        case _ => _
+        case _ =>
       }
     )
   }
